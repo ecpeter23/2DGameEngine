@@ -5,11 +5,11 @@
 
 size_t GameObject::nextID = 0;
 
-GameObject::GameObject(std::string name, v2 position, v2 dimension, GameObject::Type type) : name(std::move(name)), position(position), dimensions(dimension), type(type) {
+GameObject::GameObject(std::string name, v2_s position, v2_s dimension, Type type) : name(std::move(name)), position(position), dimensions(dimension), type(type) {
     id = nextID++;
 }
 
-GameObject::GameObject(std::string name, v2 position, std::string  textureFile) : name(std::move(name)), position(position), type(Type::MESH), textureFile(std::move(textureFile))  {
+GameObject::GameObject(std::string name, v2_s position, std::string  textureFile) : name(std::move(name)), position(position), type(GameObject::Type::MESH), textureFile(std::move(textureFile))  {
     id = nextID++;
 }
 

@@ -4,7 +4,6 @@
 #include "util/Thread.h"
 #include "util/datatypes.h"
 #include "display/Display.h"
-#include "object/CreateGameObject.h"
 #include "object/GameObject.h"
 #include "scene/Scene.h"
 
@@ -30,7 +29,7 @@ void test(){
 
 int main() {
     Scene scene(display.getRenderer(), 1);
-    std::shared_ptr<GameObject> square = CreateGameObject::createSquareGameObject("square", {0, 0}, {100, 100});
+    std::shared_ptr<GameObject> square = GameObject::create("Square", {0, 0}, {100, 100}, GameObject::Type::SQUARE);
     scene.addGameObject(square);
     thread.addFunction(lambda(display.clear())); // Wrap the method call in a lambda function
     thread.addFunction([&] { display.render(); }); // Wrap the method call in a lambda function

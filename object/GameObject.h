@@ -1,23 +1,33 @@
 #pragma once
 
 #include "../util/datatypes.h"
-#include "CreateGameObject.h"
+#include <memory>
 #include <string>
 #include <SDL.h>
 
 class GameObject {
 public:
+    virtual ~GameObject() = default;
+
     enum class Type{
         SQUARE,
         CIRCLE,
         MESH
     };
 
-    GameObject(std::string name, v2 position, v2 dimensions, Type type);
-    GameObject(std::string name, v2 position, std::string  textureFile);
+    static std::shared_ptr<GameObject> create(const std::string& name, v2_s position, v2_s dimensions, Type type) {
+        return std::make_shared<GameObject>(name, position, dimensions, type);
+    }
 
-    v2 position;
-    v2 dimensions{};
+    static std::shared_ptr<GameObject> create(const std::string& name, v2_s position, std::string textureFile) {
+        return std::make_shared<GameObject>(name, position, std::move(textureFile));
+    }
+
+    GameObject(std::string name, v2_s position, v2_s dimensions, Type type);
+    GameObject(std::string name, v2_s position, std::string  textureFile);
+
+    v2_s position;
+    v2_s dimensions{};
     std::string name;
     SDL_Texture* texture{};
     Type type;
