@@ -37,7 +37,7 @@ void GameObject::load(SDL_Renderer *renderer_) {
 }
 
 void GameObject::render(SDL_Renderer *renderer_) const{
-    float cx, cy, zoom;
+    f32 cx, cy, zoom;
     Camera::get_position(cx, cy);
     Camera::get_zoom(zoom);
     SDL_Rect dstRect = {(int)((position.x - cx) * zoom), (int)(position.y - cy), (int)(dimensions.x * zoom), (int)(dimensions.y * zoom)};

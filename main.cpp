@@ -6,6 +6,7 @@
 #include "display/Display.h"
 #include "object/GameObject.h"
 #include "scene/Scene.h"
+#include "scene/SceneManager.h"
 
 /**
  * TODO:
@@ -18,7 +19,10 @@
 
 
 Display display("2D Game Engine", 800, 600);
+SceneManager sceneManager;
 Thread thread;
+Thread thread2;
+Thread thread3;
 SDL_Event event;
 
 void test(){
@@ -27,14 +31,35 @@ void test(){
     display.present();
 }
 
+void test2(){
+    std::cout << "Hello World" << std::endl;
+}
+
+void test3(u_int32_t i){
+    std::cout << "num = " << i << std::endl;
+}
+
 int main() {
     Scene scene(display.getRenderer(), 1);
     std::shared_ptr<GameObject> square = GameObject::create("Square", {0, 0}, {100, 100}, GameObject::Type::SQUARE);
     scene.addGameObject(square);
+    sceneManager.loadScene(&scene);
+    scene.render();
+    //thread.addFunction(test);
     thread.addFunction(lambda(display.clear())); // Wrap the method call in a lambda function
-    thread.addFunction([&] { display.render(); }); // Wrap the method call in a lambda function
+    thread.addFunction([&] { scene.render(); }); // Wrap the method call in a lambda function
     thread.addFunction([&] { display.present(); }); // Wrap the method call in a lambda function
+
+    thread2.addFunction(test2);
+    u_int32_t i = 5;
+    thread3.addFunctionWithArgs(test3, i);
+
     thread.start(true, 10);
+    thread2.start(true, 10);
+    thread3.start();
+
+    thread2.wait(3000000000);
+
 
 
     while (!display.isClosed()){
@@ -43,6 +68,8 @@ int main() {
         }
     }
 
+    thread3.end();
+    thread2.end();
     thread.end();
     return 0;
 }

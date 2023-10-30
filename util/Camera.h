@@ -1,5 +1,7 @@
 #pragma once
 
+#include "datatypes.h"
+
 class Camera {
 public:
     enum class View{
@@ -9,26 +11,26 @@ public:
         ISOMETRIC
     };
 
-    static void set_position(float x, float y);
-    static void get_position(float &x, float &y);
+    static void set_position(f32 x, f32 y);
+    static void get_position(f32 &x, f32 &y);
 
-    static void set_zoom(float zoom);
-    static float get_zoom(float &zoom);
+    static void set_zoom(f32 zoom);
+    static void get_zoom(f32 &zoom);
 
-    static void set_rotation(float rotation);
-    static float get_rotation(float &rotation);
+    static void set_rotation(f32 rotation);
+    static void get_rotation(f32 &rotation);
 
     // static void set_view(View view);
     // static float get_view(View &view);
 
-    static void move(float x, float y);
-    static void zoom(float z);
-    static void rotate(float r);
+    static void move(f32 x, f32 y);
+    static void zoom(f32 z);
+    static void rotate(f32 r);
 
 private:
-    static float x;
-    static float y;
-    static float z;
-    static float rotation;
+    static f32 x;
+    static f32 y;
+    static f32 z;
+    static f32 rotation;
     static View view;
 };

@@ -1,5 +1,6 @@
 #pragma once
 
+#include "datatypes.h"
 #include <functional>
 #include <vector>
 #include <thread>
@@ -12,13 +13,14 @@ class Thread {
 public:
     Thread();
 
-    void start(bool loop = false, double hertz = 0);
+    void start(bool loop = false, f64 hertz = 0);
+    void wait(u32 nanoseconds);
     void pause();
     void resume();
     void end();
     [[nodiscard]] bool running() const;
     [[nodiscard]] unsigned long getID() const;
-    void addFunction(const std::function<void()>& function, int index = -1);
+    void addFunction(const std::function<void()>& function, i32 index = -1);
 
     template <typename Func, typename... Args>
     void addFunctionWithArgs(const Func& function, Args&&... args) {
@@ -42,7 +44,7 @@ private:
     bool paused;
     bool stopped;
     bool loopEnabled;
-    int hertz;
-    unsigned long id;
-    static std::atomic<unsigned long> idCounter;
+    f64 hertz;
+    ulong id;
+    static std::atomic<ulong> idCounter;
 };

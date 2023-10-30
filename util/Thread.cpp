@@ -1,10 +1,10 @@
 #include "Thread.h"
 
-std::atomic<unsigned long> Thread::idCounter(0);
+std::atomic<ulong> Thread::idCounter(0);
 
 Thread::Thread() : id(++idCounter), paused(false), stopped(false), loopEnabled(false), hertz(0) {}
 
-void Thread::addFunction(const std::function<void()>& function, int index) {
+void Thread::addFunction(const std::function<void()>& function, i32 index) {
     std::unique_lock<std::mutex> lock(mutex);
     if (index >= 0 && index < functions.size()) {
         functions.insert(functions.begin() + index, function);
@@ -14,7 +14,7 @@ void Thread::addFunction(const std::function<void()>& function, int index) {
     functions.emplace_back(function);
 }
 
-void Thread::start(bool loop, double hertz) {
+void Thread::start(bool loop, f64 hertz) {
     std::unique_lock<std::mutex> lock(mutex);
     loopEnabled = loop;
     this->hertz = hertz;
@@ -39,7 +39,7 @@ void Thread::start(bool loop, double hertz) {
             if (loopEnabled && hertz > 0) {
                 auto endTime = std::chrono::high_resolution_clock::now();
                 auto elapsedTime = std::chrono::duration_cast<std::chrono::milliseconds>(endTime - startTime);
-                auto sleepDuration = std::chrono::milliseconds((int)(1000 / hertz)) - elapsedTime;
+                auto sleepDuration = std::chrono::milliseconds((i32)(1000 / hertz)) - elapsedTime;
 
                 if (sleepDuration.count() > 0) {
                     std::this_thread::sleep_for(sleepDuration);
@@ -53,6 +53,12 @@ void Thread::start(bool loop, double hertz) {
 void Thread::pause() {
     std::unique_lock<std::mutex> lock(mutex);
     paused = true;
+}
+
+void Thread::wait(u32 nanoseconds) {
+    std::unique_lock<std::mutex> lock(mutex);
+    cv.wait_for(lock, std::chrono::nanoseconds(nanoseconds));
+    cv.notify_all();
 }
 
 void Thread::resume() {
@@ -78,6 +84,6 @@ bool Thread::running() const {
     return thread.joinable() && !stopped;
 }
 
-unsigned long Thread::getID() const {
+ulong Thread::getID() const {
     return id;
 }

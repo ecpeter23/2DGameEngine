@@ -1,47 +1,47 @@
 #include "Camera.h"
 
 
-float Camera::x = 0.0f;
-float Camera::y = 0.0f;
-float Camera::z = 1.0f;
-float Camera::rotation = 0.0f;
+f32 Camera::x = 0.0f;
+f32 Camera::y = 0.0f;
+f32 Camera::z = 1.0f;
+f32 Camera::rotation = 0.0f;
 
-void Camera::set_position(float x, float y) {
+void Camera::set_position(f32 x, f32 y) {
     Camera::x = x;
     Camera::y = y;
 }
 
-void Camera::get_position(float &x, float &y) {
+void Camera::get_position(f32 &x, f32 &y) {
     x = Camera::x;
     y = Camera::y;
 }
 
-void Camera::set_zoom(float zoom) {
+void Camera::set_zoom(f32 zoom) {
     Camera::z = zoom;
 }
 
-float Camera::get_zoom(float &zoom) {
+void Camera::get_zoom(f32 &zoom) {
     zoom = Camera::z;
 }
 
-void Camera::set_rotation(float rotation) {
+void Camera::set_rotation(f32 rotation) {
     Camera::rotation = rotation;
 }
 
-float Camera::get_rotation(float &rotation) {
+void Camera::get_rotation(f32 &rotation) {
     rotation = Camera::rotation;
 }
 
-void Camera::move(float dx, float dy) {
+void Camera::move(f32 dx, f32 dy) {
     Camera::x += dx;
     Camera::y += dy;
 }
 
-void Camera::zoom(float dz) {
+void Camera::zoom(f32 dz) {
     Camera::z += dz;
 }
 
-void Camera::rotate(float dr) {
+void Camera::rotate(f32 dr) {
     Camera::rotation += dr;
 }
 
