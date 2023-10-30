@@ -41,8 +41,10 @@ private:
     std::vector<std::function<void()>> functions;
     mutable std::mutex mutex;
     std::condition_variable cv;
-    bool paused;
-    bool stopped;
+    std::atomic<bool> stopped;
+    std::atomic<bool> pauseFlag;
+    std::atomic<bool> waitFlag;
+    std::atomic<std::chrono::milliseconds> waitDuration;
     bool loopEnabled;
     f64 hertz;
     ulong id;

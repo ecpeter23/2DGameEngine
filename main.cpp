@@ -47,7 +47,7 @@ int main() {
     scene.render();
     //thread.addFunction(test);
     thread.addFunction(lambda(display.clear())); // Wrap the method call in a lambda function
-    thread.addFunction([&] { scene.render(); }); // Wrap the method call in a lambda function
+    thread.addFunction([&] { display.render(); }); // Wrap the method call in a lambda function
     thread.addFunction([&] { display.present(); }); // Wrap the method call in a lambda function
 
     thread2.addFunction(test2);
@@ -57,9 +57,9 @@ int main() {
     thread.start(true, 10);
     thread2.start(true, 10);
     thread3.start();
-
-    thread2.wait(3000000000);
-
+    //thread2.pause();
+    thread2.wait(10000);
+    //thread2.resume();
 
 
     while (!display.isClosed()){
@@ -67,9 +67,13 @@ int main() {
             display.pollEvents(event);
         }
     }
-
+    std::cout << thread.getID() << "\n";
+    std::cout << thread2.getID() << "\n";
+    std::cout << thread3.getID() << std::endl;
     thread3.end();
     thread2.end();
     thread.end();
+
+
     return 0;
 }
