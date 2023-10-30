@@ -5,8 +5,6 @@ Scene::Scene(SDL_Renderer *renderer_, i32 sceneID)
         : renderer_(renderer_), sceneID(sceneID) {
 }
 
-Scene::~Scene() = default;
-
 void Scene::addGameObject(const std::shared_ptr<GameObject>& gameObject) {
     gameObjects.push_back(gameObject);
 }

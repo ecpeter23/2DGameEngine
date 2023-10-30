@@ -10,7 +10,7 @@ class GameObject; // Forward declaration
 class Scene {
 public:
     Scene(SDL_Renderer *renderer_, int sceneID);
-    virtual ~Scene();
+    virtual ~Scene() = default;;
 
     void addGameObject(const std::shared_ptr<GameObject>& gameObject);
     virtual void loadResources();
