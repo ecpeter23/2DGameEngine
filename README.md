@@ -1,9 +1,3 @@
-# **2D Game Engine**
-
-## Overview
-
-This 2D Game Engine is designed as a lightweight, versatile framework for building 2D games. Built on top of SDL2, it provides a simple yet powerful foundation for game development, including rendering, input handling, scene management, and basic physics and collision detection capabilities.
-
 # 2D Game Engine
 
 ## Overview
