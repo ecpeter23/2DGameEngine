@@ -105,7 +105,6 @@ void Display::drawGameObject(const GameObject& gameObject) {
     Camera::get_position(cx, cy);
     Camera::get_zoom(zoom);
     SDL_Rect dstRect = {(int)((gameObject.position.x - cx) * zoom), (int)(gameObject.position.y - cy), (int)(gameObject.dimensions.x * zoom), (int)(gameObject.dimensions.y * zoom)};
-
     if (gameObject.texture){
         SDL_RenderCopy(renderer_, gameObject.texture, nullptr, &dstRect);
         return;

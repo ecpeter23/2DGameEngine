@@ -1,6 +1,5 @@
 #include <iostream>
 #include <SDL.h>
-#include <unistd.h>
 #include "util/Thread.h"
 #include "util/datatypes.h"
 #include "display/Display.h"
@@ -20,7 +19,7 @@
 
 Display display("2D Game Engine", 800, 600);
 SceneManager sceneManager;
-Thread thread;
+//Thread thread;
 Thread thread2;
 Thread thread3;
 SDL_Event event;
@@ -44,35 +43,37 @@ int main() {
     std::shared_ptr<GameObject> square = GameObject::create("Square", {0, 0}, {100, 100}, GameObject::Type::SQUARE);
     scene.addGameObject(square);
     sceneManager.loadScene(&scene);
-    scene.render();
+    //scene.render();
     //thread.addFunction(test);
-    thread.addFunction(lambda(display.clear())); // Wrap the method call in a lambda function
-    thread.addFunction([&] { display.render(); }); // Wrap the method call in a lambda function
-    thread.addFunction([&] { display.present(); }); // Wrap the method call in a lambda function
+    //thread.addFunction(lambda(display.clear())); // Wrap the method call in a lambda function
+    //thread.addFunction(lambda(scene.render())); // Wrap the method call in a lambda function
+    //thread.addFunction([&] { display.present(); }); // Wrap the method call in a lambda function
 
     thread2.addFunction(test2);
-    u_int32_t i = 5;
+    u_int32_t i = 2;
     thread3.addFunctionWithArgs(test3, i);
 
-    thread.start(true, 10);
+    //thread.start(true, 10);
     thread2.start(true, 10);
     thread3.start();
-    //thread2.pause();
-    thread2.wait(10000);
-    //thread2.resume();
+    //thread2.wait(10000);
 
 
     while (!display.isClosed()){
+        display.clear();
+        scene.render();
+        display.present();
+
         while (SDL_PollEvent(&event)) {
             display.pollEvents(event);
         }
     }
-    std::cout << thread.getID() << "\n";
+    //std::cout << thread.getID() << "\n";
     std::cout << thread2.getID() << "\n";
     std::cout << thread3.getID() << std::endl;
     thread3.end();
     thread2.end();
-    thread.end();
+    //thread.end();
 
 
     return 0;

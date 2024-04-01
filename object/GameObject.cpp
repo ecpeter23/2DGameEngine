@@ -46,7 +46,7 @@ void GameObject::render(SDL_Renderer *renderer_) const{
         SDL_RenderCopy(renderer_, texture, nullptr, &dstRect);
         return;
     }
-
+    SDL_SetRenderDrawColor(renderer_, 0, 255, 0, 255);
     SDL_RenderDrawRect(renderer_, &dstRect);
 }
 
