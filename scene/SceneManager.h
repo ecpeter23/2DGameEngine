@@ -1,13 +1,14 @@
 #pragma once
-
-#include <SDL.h>
-#include "Scene.h"
+#include "SceneBase.h"
+#include <memory>
 
 class SceneManager {
 public:
-    Scene* currentScene;
-
     SceneManager();
+    void switchScene(std::unique_ptr<SceneBase> newScene);
+    void update();
+    void render();
 
-    void loadScene(Scene* newScene);
+private:
+    std::unique_ptr<SceneBase> currentScene;
 };

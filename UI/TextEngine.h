@@ -5,7 +5,7 @@
 #include <string>
 #include "../util/datatypes.h"
 
-#define DEFAULT_FONT "assets/fonts/Roboto-Regular.ttf"
+#define DEFAULT_FONT "/Users/elipeter/Downloads/2DGameEngine/assets/fonts/open-sans/OpenSans-Regular.ttf"
 
 class TextEngine {
 public:
@@ -19,7 +19,4 @@ private:
     TTF_Font* loadFont(const std::string& fontPath, int fontSize);
     TTF_Font* font{};
     SDL_Renderer *renderer_{};
-
-
-
 };

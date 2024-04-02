@@ -11,14 +11,8 @@ TextEngine::TextEngine(SDL_Renderer *renderer) {
 }
 
 TextEngine::~TextEngine() {
-    // Quit SDL_ttf
-    do {
-        TTF_CloseFont(font);
-        font = nullptr;
-        renderer_ = nullptr;
-
-        TTF_Quit();
-    } while (TTF_WasInit());
+    TTF_CloseFont(font);
+    TTF_Quit();
 }
 
 void TextEngine::renderText(const std::string& text, int x, int y, int fontSize, SDL_Color color) {
