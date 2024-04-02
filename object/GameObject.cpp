@@ -50,6 +50,11 @@ void GameObject::render(SDL_Renderer *renderer_) const{
     SDL_RenderDrawRect(renderer_, &dstRect);
 }
 
+void GameObject::update() {
+    // Update logic for the game object
+}
+
+
 void GameObject::addMeshCollider(bool remove) {
 
 }

@@ -16,7 +16,7 @@ public:
     virtual void loadResources();
     virtual void freeResources();
     virtual void loadSceneData();
-    //virtual void update();
+    virtual void update();
     virtual void render();
 
 protected:

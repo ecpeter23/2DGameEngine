@@ -29,12 +29,12 @@ void Scene::loadSceneData() {
     // Load scene-specific data
 }
 
-/*void Scene::update() {
+void Scene::update() {
     // Update game objects
     for (const auto& gameObject : gameObjects) {
         gameObject->update();
     }
-}*/
+}
 
 void Scene::render() {
     // Render game objects

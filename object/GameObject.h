@@ -45,6 +45,7 @@ public:
 
     void load(SDL_Renderer *renderer_);
     void render(SDL_Renderer *renderer_) const;
+    virtual void update();
 
     [[nodiscard]] size_t getID() const;
 private:
