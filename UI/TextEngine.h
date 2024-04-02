@@ -9,17 +9,15 @@
 
 class TextEngine {
 public:
-    TextEngine();
+    explicit TextEngine(SDL_Renderer *renderer);
     ~TextEngine();
 
-    bool init(SDL_Renderer *renderer_);
     void renderText(const std::string& text, int x, int y, int fontSize, SDL_Color color);
-    void updateFont(const std::string& fontPath, int fontSize);
-    void free();
+    void setFont(const std::string& fontPath, int fontSize);
 
 private:
     TTF_Font* loadFont(const std::string& fontPath, int fontSize);
-    TTF_Font* font;
+    TTF_Font* font{};
     SDL_Renderer *renderer_{};
 
 

@@ -1,27 +1,24 @@
 #include "TextEngine.h"
 
-TextEngine::TextEngine() noexcept {
+TextEngine::TextEngine(SDL_Renderer *renderer) {
     // Initialize SDL_ttf
     ASSERT(TTF_Init() == 0, "Failed to initialize SDL_ttf");
 
-    // Get the renderer from somewhere
-    renderer_ = nullptr;
+    this->renderer_ = renderer;
+    ASSERT(renderer_, "Renderer is null");
+
+    font = loadFont(DEFAULT_FONT, 24);
 }
 
 TextEngine::~TextEngine() {
     // Quit SDL_ttf
     do {
+        TTF_CloseFont(font);
+        font = nullptr;
+        renderer_ = nullptr;
+
         TTF_Quit();
     } while (TTF_WasInit());
-}
-
-bool TextEngine::init(SDL_Renderer *renderer) {
-    // Load your fonts and perform any initialization here
-    this->renderer_ = renderer;
-    ASSERT(renderer_, "Renderer is null");
-
-    font = loadFont(DEFAULT_FONT, 24);
-    return true;
 }
 
 void TextEngine::renderText(const std::string& text, int x, int y, int fontSize, SDL_Color color) {
@@ -41,13 +38,7 @@ TTF_Font* TextEngine::loadFont(const std::string& fontPath, int fontSize) {
     return font;
 }
 
-void TextEngine::free() {
-    TTF_CloseFont(font);
-    font = nullptr;
-    renderer_ = nullptr;
-}
-
-void TextEngine::updateFont(const std::string& fontPath, int fontSize=24) {
+void TextEngine::setFont(const std::string &fontPath, int fontSize) {
     TTF_CloseFont(font);
     font = loadFont(fontPath, fontSize);
 }
