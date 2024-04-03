@@ -11,8 +11,8 @@ class QuadTree {
 public:
     QuadTree(int level, const SDL_Rect& bounds);
     void clear();
-    void insert(const GameObject& object);
-    std::vector<GameObject> retrieve(const GameObject& object);
+    //void insert(const GameObject& object);
+    //std::vector<GameObject> retrieve(const GameObject& object);
     void drawSections(SDL_Renderer *renderer) const;
 
 private:
@@ -25,5 +25,5 @@ private:
     std::array<std::unique_ptr<QuadTree>, 4> children;
 
     void split();
-    [[nodiscard]] int getIndex(const GameObject& object) const;
+    //[[nodiscard]] int getIndex(const GameObject& object) const;
 };

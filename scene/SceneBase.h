@@ -3,12 +3,13 @@
 #include <memory>
 #include <vector>
 #include "../object/GameObject.h"
+#include "../object/TransformComponent.h"
 #include "../UI/TextEngine.h"
 #include <SDL.h>
 
 class SceneBase {
 public:
-    SceneBase(SDL_Renderer* renderer) : renderer_(renderer) {}
+    explicit SceneBase(SDL_Renderer* renderer) : renderer_(renderer) {}
     virtual ~SceneBase() = default;
 
     virtual void loadResources() = 0;

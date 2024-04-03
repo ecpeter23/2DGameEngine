@@ -26,7 +26,7 @@ public:
     void present();
     void render();
     void drawTexture(SDL_Texture *texture, SDL_Rect *srcRect, SDL_Rect *dstRect);
-    void drawGameObject(const GameObject& gameObject);
+    //void drawGameObject(const GameObject& gameObject);
     static SDL_Texture *loadTexture(const std::string &filePath);
 
     SDL_Renderer* getRenderer();

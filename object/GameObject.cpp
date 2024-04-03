@@ -1,3 +1,4 @@
+/*
 #include "GameObject.h"
 #include <utility>
 #include "../util/Camera.h"
@@ -9,7 +10,7 @@ GameObject::GameObject(std::string name, v2_s position, v2_s dimension, Type typ
     id = nextID++;
 }
 
-GameObject::GameObject(std::string name, v2_s position, std::string  textureFile) : name(std::move(name)), position(position), type(GameObject::Type::MESH), textureFile(std::move(textureFile))  {
+GameObject::GameObject(std::string name, v2_s position, std::string textureFile) : name(std::move(name)), position(position), type(GameObject::Type::MESH), textureFile(std::move(textureFile))  {
     id = nextID++;
 }
 
@@ -49,44 +50,48 @@ void GameObject::render(SDL_Renderer *renderer_) const{
     SDL_SetRenderDrawColor(renderer_, 0, 255, 0, 255);
     SDL_RenderFillRect(renderer_, &dstRect);
 }
+*/
+
+#include "GameObject.h"
+#include <iostream>
+
+size_t GameObject::nextID = 0;
+
+GameObject::GameObject(std::string name) : name(std::move(name)), id(nextID++) {}
+
+void GameObject::addComponent(std::unique_ptr<Component> component) {
+    components.push_back(std::move(component));
+}
+
+Component* GameObject::getComponent(Component::ComponentType type) const {
+    for (const auto& component : components) {
+        if (component->getType() == type) {
+            return component.get();
+        }
+    }
+    return nullptr;
+}
 
 void GameObject::update() {
-    // Update logic for the game object
+    for (auto& component : components) {
+        component->update();
+    }
 }
 
-
-void GameObject::addMeshCollider(bool remove) {
-
+void GameObject::render(SDL_Renderer* renderer) {
+    for (const auto& component : components) {
+        component->render(renderer);
+    }
 }
 
-void GameObject::addSquareCollider(bool remove) {
-
+const std::string& GameObject::getName() const {
+    return name;
 }
 
-void GameObject::addCircleCollider(bool remove) {
-
-}
-
-void GameObject::addStaticBody(bool remove) {
-
-}
-
-void GameObject::addKinematicBody(bool remove) {
-
-}
-
-void GameObject::addRigidBody(bool remove) {
-
-}
-
-void GameObject::addSoftBody(bool remove) {
-
-}
-
-// Add the getID() function definition
 size_t GameObject::getID() const {
     return id;
 }
+
 
 
 

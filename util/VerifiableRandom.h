@@ -103,10 +103,6 @@ private:
         SHA512_Init(&sha512);
         SHA512_Update(&sha512, input.c_str(), input.size());
         SHA512_Final(hash, &sha512);
-//        SHA256_CTX sha256;
-//        SHA256_Init(&sha256);
-//        SHA256_Update(&sha256, input.c_str(), input.size());
-//        SHA256_Final(hash, &sha256);
 
         std::stringstream ss;
         for (unsigned char i : hash) {

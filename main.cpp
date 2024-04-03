@@ -20,18 +20,18 @@
 
 
 
-Display display("2D Game Engine", 800, 600);
-SceneManager sceneManager;
+//Display display("2D Game Engine", 3024, 1964);
+//SceneManager sceneManager;
 //Thread thread;
 Thread thread2;
 Thread thread3;
 SDL_Event event;
 
-void test(){
+/*void test(){
     display.clear();
     display.render();
     display.present();
-}
+}*/
 
 void test2(){
     std::cout << "Hello World" << std::endl;

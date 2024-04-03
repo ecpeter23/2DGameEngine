@@ -8,7 +8,7 @@ QuadTree::QuadTree(int level, const SDL_Rect& bounds)
     }
 }
 
-void QuadTree::insert(const GameObject& object) {
+/*void QuadTree::insert(const GameObject& object) {
     if (children[0] != nullptr) {
         int index = getIndex(object);
         if (index != -1) {
@@ -35,7 +35,7 @@ void QuadTree::insert(const GameObject& object) {
             }
         }
     }
-}
+}*/
 
 void QuadTree::clear() {
     objects.clear();
@@ -48,7 +48,7 @@ void QuadTree::clear() {
     }
 }
 
-std::vector<GameObject> QuadTree::retrieve(const GameObject& object) {
+/*std::vector<GameObject> QuadTree::retrieve(const GameObject& object) {
     std::vector<GameObject> potentialColliders;
     int index = getIndex(object);
     if (index != -1 && children[0] != nullptr) {
@@ -65,7 +65,7 @@ std::vector<GameObject> QuadTree::retrieve(const GameObject& object) {
     potentialColliders.insert(potentialColliders.end(), objects.begin(), objects.end());
 
     return potentialColliders;
-}
+}*/
 
 
 void QuadTree::split() {
@@ -78,7 +78,7 @@ void QuadTree::split() {
     children[3] = std::make_unique<QuadTree>(level + 1, SDL_Rect{bounds.x + childWidth, bounds.y + childHeight, childWidth, childHeight});
 }
 
-int QuadTree::getIndex(const GameObject& object) const {
+/*int QuadTree::getIndex(const GameObject& object) const {
     int index = -1;
     double verticalMidpoint = bounds.x + (bounds.w / 2);
     double horizontalMidpoint = bounds.y + (bounds.h / 2);
@@ -101,7 +101,7 @@ int QuadTree::getIndex(const GameObject& object) const {
     }
 
     return index;
-}
+}*/
 
 void QuadTree::drawSections(SDL_Renderer *renderer) const {
     float cx, cy;
