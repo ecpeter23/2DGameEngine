@@ -4,7 +4,6 @@
 #include "util/datatypes.h"
 #include "display/Display.h"
 #include "object/GameObject.h"
-#include "scene/Scene.h"
 #include "scene/SceneManager.h"
 #include "UI/TextEngine.h"
 
@@ -98,7 +97,6 @@ int main() {
 
         display.present();
 
-        SDL_Event event;
         while (SDL_PollEvent(&event)) {
             display.pollEvents(event);
         }

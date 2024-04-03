@@ -47,7 +47,7 @@ void GameObject::render(SDL_Renderer *renderer_) const{
         return;
     }
     SDL_SetRenderDrawColor(renderer_, 0, 255, 0, 255);
-    SDL_RenderDrawRect(renderer_, &dstRect);
+    SDL_RenderFillRect(renderer_, &dstRect);
 }
 
 void GameObject::update() {

@@ -1,6 +1,7 @@
 // MenuScene.h
 #pragma once
 #include "../../scene/SceneBase.h"
+#include "../../util/VerifiableRandom.h"
 
 class MenuScene : public SceneBase {
 public:
@@ -14,4 +15,11 @@ public:
 private:
     TextEngine textEngine;
     std::shared_ptr<GameObject> testObject;
+    std::string randomNumber;
+    std::string randomNumberHash;
+
+    std::string verifyRandomNumber() {
+        bool result = VerifiableRandom::verifyRandomNumber(randomNumber, randomNumberHash);
+        return result ? "Verification: Passed" : "Verification: Failed";
+    }
 };
