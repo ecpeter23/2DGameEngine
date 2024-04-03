@@ -13,6 +13,12 @@ void SceneManager::update() {
     }
 }
 
+void SceneManager::updateInput(const SDL_Event& e) {
+    if (currentScene) {
+        currentScene->updateInput(e);
+    }
+}
+
 void SceneManager::render() {
     if (currentScene) {
         currentScene->render();

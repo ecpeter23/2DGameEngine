@@ -16,6 +16,7 @@ public:
     [[nodiscard]] Component* getComponent(Component::ComponentType type) const;
     void update();
     void render(SDL_Renderer* renderer);
+    void clearComponents();
 
     [[nodiscard]] const std::string& getName() const;
     [[nodiscard]] size_t getID() const;

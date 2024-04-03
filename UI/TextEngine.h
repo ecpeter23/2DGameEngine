@@ -7,6 +7,8 @@
 #include <memory>
 #include "../util/datatypes.h"
 
+#include <iostream>
+
 #define DEFAULT_FONT "/Users/elipeter/Downloads/2DGameEngine/assets/fonts/open-sans/OpenSans-Regular.ttf"
 
 enum class TextAlign {
@@ -24,6 +26,7 @@ enum class TextRenderStyle {
 struct FontDeleter {
     void operator()(TTF_Font* font) {
         TTF_CloseFont(font);
+        std::cout << "closed font" << std::endl;
     }
 };
 

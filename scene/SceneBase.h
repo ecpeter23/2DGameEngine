@@ -14,6 +14,7 @@ public:
 
     virtual void loadResources() = 0;
     virtual void update() = 0;
+    virtual void updateInput(const SDL_Event& e) = 0;
     virtual void render() = 0;
 
 protected:

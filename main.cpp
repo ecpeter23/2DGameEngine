@@ -1,5 +1,6 @@
 #include <iostream>
 #include <SDL.h>
+#include "box2d/box2d.h"
 #include "util/Thread.h"
 #include "util/datatypes.h"
 #include "display/Display.h"
@@ -9,6 +10,7 @@
 
 // Scenes:
 #include "assets/scenes/MenuScene.h"
+#include "assets/scenes/DebugScene.h"
 
 /**
  * TODO:
@@ -89,6 +91,9 @@ int main() {
     // Switch to the menu scene
     sceneManager.switchScene(std::make_unique<MenuScene>(display.getRenderer()));
 
+    // DEBUG
+    // sceneManager.switchScene(std::make_unique<DebugScene>(display.getRenderer()));
+
     while (!display.isClosed()) {
         display.clear();
 
@@ -99,6 +104,7 @@ int main() {
 
         while (SDL_PollEvent(&event)) {
             display.pollEvents(event);
+            sceneManager.updateInput(event);
         }
     }
 

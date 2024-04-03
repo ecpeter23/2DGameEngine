@@ -9,6 +9,7 @@ TextEngine::TextEngine(SDL_Renderer *renderer)
 }
 
 TextEngine::~TextEngine() {
+    fontCache.clear();
     TTF_Quit();
 }
 

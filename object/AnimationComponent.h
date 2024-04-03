@@ -12,24 +12,47 @@ struct Frame {
 
 class AnimationComponent : public Component {
 public:
-    void addFrame(Frame frame) {
-        frames.push_back(frame);
+    AnimationComponent() = default;
+
+    // Adds a texture to the animation sequence
+    void addTexture(SDL_Texture* texture) {
+        textures.push_back(texture);
     }
 
-    void update() override {
-        currentFrameTime += 1.0f / 60.0f; // Assuming 60 FPS, adjust according to your game's frame rate
-        if (currentFrameTime >= frames[currentFrame].duration) {
-            currentFrame = (currentFrame + 1) % frames.size();
-            currentFrameTime = 0.0f;
+    void addTextures(const std::vector<SDL_Texture*>& textures) {
+        this->textures.insert(this->textures.end(), textures.begin(), textures.end());
+    }
+
+    [[nodiscard]] ComponentType getType() const override {
+        return ComponentType::ComponentAnimation;
+    }
+
+    // Update the animation based on the time elapsed
+    void update(float deltaTime) {
+        if (textures.empty()) return;
+
+        currentFrameDuration += deltaTime;
+        if (currentFrameDuration >= frameDurations[currentFrame]) {
+            currentFrameDuration = 0.0f;
+            currentFrame = (currentFrame + 1) % textures.size();
         }
     }
 
-    void render(SDL_Renderer* renderer, SDL_Texture* texture, SDL_Rect& dstRect) {
-        SDL_RenderCopy(renderer, texture, &frames[currentFrame].rect, &dstRect);
+    // Render the current frame
+    void render(SDL_Renderer* renderer, const SDL_Rect& dstRect) {
+        if (!textures.empty() && currentFrame < textures.size()) {
+            SDL_RenderCopy(renderer, textures[currentFrame], nullptr, &dstRect);
+        }
+    }
+
+    // Sets frame durations for each texture
+    void setFrameDurations(const std::vector<float>& durations) {
+        frameDurations = durations;
     }
 
 private:
-    std::vector<Frame> frames;
-    int currentFrame = 0;
-    float currentFrameTime = 0.0f;
+    std::vector<SDL_Texture*> textures;
+    std::vector<float> frameDurations; // Seconds per frame
+    size_t currentFrame = 0;
+    float currentFrameDuration = 0.0f; // Elapsed time in the current frame
 };

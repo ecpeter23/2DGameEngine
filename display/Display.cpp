@@ -15,7 +15,7 @@ Display::~Display() {
 
 
 bool Display::init() {
-    ASSERT(!SDL_Init(SDL_INIT_VIDEO), "SDL failed to initialize: %s", SDL_GetError())
+    ASSERT(!SDL_Init(SDL_INIT_VIDEO | SDL_INIT_EVENTS), "SDL failed to initialize: %s", SDL_GetError())
 
     window_ = SDL_CreateWindow(title_.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width_, height_, SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE);
     ASSERT(window_, "failed to create SDL window: %s\n", SDL_GetError())

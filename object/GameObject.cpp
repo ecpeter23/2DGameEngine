@@ -60,6 +60,7 @@ size_t GameObject::nextID = 0;
 GameObject::GameObject(std::string name) : name(std::move(name)), id(nextID++) {}
 
 void GameObject::addComponent(std::unique_ptr<Component> component) {
+    component->setGameObject(this);
     components.push_back(std::move(component));
 }
 
@@ -82,6 +83,10 @@ void GameObject::render(SDL_Renderer* renderer) {
     for (const auto& component : components) {
         component->render(renderer);
     }
+}
+
+void GameObject::clearComponents() {
+    components.clear();
 }
 
 const std::string& GameObject::getName() const {
