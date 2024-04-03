@@ -9,6 +9,8 @@ This 2D Game Engine is designed as a lightweight, versatile framework for buildi
 ### Prerequisites
 
 - SDL2 Library
+- SDL2 TTF Library
+- openssl Library
 - CMake (Version 3.22 or higher)
 - C++ Compiler (C++23 standard support required)
 
