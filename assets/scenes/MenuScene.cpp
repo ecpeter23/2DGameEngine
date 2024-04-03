@@ -19,8 +19,10 @@ void MenuScene::update() {
 
 void MenuScene::render() {
     // Render the menu scene
-    textEngine.renderText("Welcome to the Menu", 100, 50, 24, {255, 255, 255, 255});
-    textEngine.renderText("Random Number: " + randomNumber, 100, 100, 12, {255, 255, 255, 255});
-    textEngine.renderText(verifyRandomNumber(), 100, 150, 24, {255, 255, 255, 255});
+    textEngine.setFontSize(24);
+    textEngine.renderText("Welcome to the Menu", 100, 50, {255, 255, 255, 255});
+    textEngine.setFontSize(12);
+    textEngine.renderText("Random Number: " + randomNumber, 100, 100, {255, 255, 255, 255});
+    textEngine.renderText("Hash: " + randomNumberHash, 100, 150, {255, 255, 255, 255});
     testObject->render(renderer_);
 }

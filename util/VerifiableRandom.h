@@ -98,11 +98,15 @@ private:
 
     // Hashes the input using SHA-256 and returns the hex string
     static std::string hash(const std::string& input) {
-        unsigned char hash[SHA256_DIGEST_LENGTH];
-        SHA256_CTX sha256;
-        SHA256_Init(&sha256);
-        SHA256_Update(&sha256, input.c_str(), input.size());
-        SHA256_Final(hash, &sha256);
+        unsigned char hash[SHA512_DIGEST_LENGTH];
+        SHA512_CTX sha512;
+        SHA512_Init(&sha512);
+        SHA512_Update(&sha512, input.c_str(), input.size());
+        SHA512_Final(hash, &sha512);
+//        SHA256_CTX sha256;
+//        SHA256_Init(&sha256);
+//        SHA256_Update(&sha256, input.c_str(), input.size());
+//        SHA256_Final(hash, &sha256);
 
         std::stringstream ss;
         for (unsigned char i : hash) {
