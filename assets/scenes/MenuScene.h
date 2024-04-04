@@ -32,4 +32,14 @@ private:
         bool result = VerifiableRandom::verifyRandomNumber(randomNumber, randomNumberHash);
         return result ? "Verification: Passed" : "Verification: Failed";
     }
+
+    void createPhysicsObject(std::unique_ptr<GameObject> &object, const v2_s &position, const v2_s &scale,
+                        b2BodyType bodyType,
+                        float shapeWidth, float shapeHeight);
+
+    void applyForceToPlayer(const b2Vec2 &force);
+
+    void setupActionHandlers();
+
+    void setupInputBindings();
 };

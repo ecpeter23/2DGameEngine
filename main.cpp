@@ -90,6 +90,7 @@ int main() {
 
     // Switch to the menu scene
     sceneManager.switchScene(std::make_unique<MenuScene>(display.getRenderer()));
+    thread3.addFunctionWithArgs(MenuScene::, i);
 
     // DEBUG
     // sceneManager.switchScene(std::make_unique<DebugScene>(display.getRenderer()));
